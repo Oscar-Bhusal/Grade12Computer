@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Grade 12 Computer</title>
+    <style>
+      :root {
+        --nav-bg: rgba(255, 255, 255, 0.75);
+        --nav-border: rgba(255, 255, 255, 0.25);
+        --nav-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
+        --nav-title: #2d3748;
+        --nav-title-accent: #ef4444;
+        --btn-border: #ef4444;
+        --btn-bg: #fff;
+        --btn-text: #ef4444;
+        --btn-shadow: 0 2px 8px rgba(239, 68, 68, 0.1);
+        --btn-shadow-hover: 0 4px 16px rgba(239, 68, 68, 0.13);
+        --switch-bg: #f3f4f6;
+        --switch-thumb: #ef4444;
+        --content-bg: rgba(255, 255, 255, 0.95);
+        --content-text: #222;
+      }
+      body.dark {
+        --nav-bg: rgba(30, 41, 59, 0.85);
+        --nav-border: rgba(255, 255, 255, 0.1);
+        --nav-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.28);
+        --nav-title: #f3f4f6;
+        --nav-title-accent: #ef4444;
+        --btn-border: #ef4444;
+        --btn-bg: #1e293b;
+        --btn-text: #ef4444;
+        --btn-shadow: 0 2px 8px rgba(239, 68, 68, 0.18);
+        --btn-shadow-hover: 0 4px 16px rgba(239, 68, 68, 0.23);
+        --switch-bg: #334155;
+        --switch-thumb: #ef4444;
+        --content-bg: rgba(30, 41, 59, 0.97);
+        --content-text: #f3f4f6;
+      }
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        background: linear-gradient(135deg, #e0e7ff 0%, #f0fdfa 100%);
+        font-family: "Segoe UI", Arial, sans-serif;
+        transition: background 0.4s;
+      }
+      body.dark {
+        background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+      }
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 130px;
+        min-width: 0;
+        background: var(--nav-bg);
+        box-shadow: var(--nav-shadow);
+        padding: 32px 0 32px 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 32px;
+        backdrop-filter: blur(12px);
+        border-right: 1.5px solid var(--nav-border);
+        border-top: none;
+        border-bottom: none;
+        border-left: none;
+        margin: 0;
+        z-index: 2000;
+        transition: width 0.4s linear, background 0.4s, box-shadow 0.4s;
+        overflow: hidden;
+      }
+      #title {
+        margin-left: 80px;
+      }
+      nav.expanded {
+        width: 410px; /* Increased width to fit all text */
+      }
+      nav .nav-header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        gap: 10px;
+        margin-bottom: 0;
+        margin-top: 10px;
+      }
+      nav p {
+        font-size: 22px;
+        font-weight: 600;
+        color: var(--nav-title);
+        letter-spacing: 1px;
+        transition: color 0.3s;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        user-select: none;
+        white-space: nowrap;
+        margin: 0;
+      }
+      nav.expanded p {
+        color: var(--nav-title-accent);
+      }
+      .menu-icon,
+      .home-icon {
+        font-size: 22px;
+        vertical-align: middle;
+      }
+      .home-btn {
+        background: none;
+        border: none;
+        color: inherit;
+        font: inherit;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 0;
+        margin: 0;
+      }
+      .switch-container {
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s;
+        z-index: 10;
+        margin-left: 8px;
+        display: flex;
+        align-items: center;
+      }
+      nav.expanded .switch-container {
+        opacity: 1;
+        pointer-events: auto;
+      }
+      .switch-label {
+        margin-right: 8px;
+        font-size: 15px;
+        color: var(--nav-title);
+        user-select: none;
+      }
+      .switch {
+        position: relative;
+        display: inline-block;
+        width: 44px;
+        height: 24px;
+      }
+      .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: var(--switch-bg);
+        border-radius: 24px;
+        transition: background 0.4s;
+      }
+      .slider:before {
+        position: absolute;
+        content: "";
+        height: 18px;
+        width: 18px;
+        left: 3px;
+        bottom: 3px;
+        background: var(--switch-thumb);
+        border-radius: 50%;
+        transition: transform 0.4s;
+      }
+      input:checked + .slider:before {
+        transform: translateX(20px);
+      }
+      nav div.chapter-btn {
+        margin: 0;
+        font-size: 18px;
+        border: 2px solid var(--btn-border);
+        background: var(--btn-bg);
+        color: var(--btn-text);
+        height: 44px;
+        width: 44px;
+        padding: 0;
+        text-align: center;
+        border-radius: 50%;
+        cursor: pointer;
+        box-shadow: var(--btn-shadow);
+        transition: background 0.4s, color 0.4s, width 0.4s, font-size 0.4s,
+          box-shadow 0.4s, border-radius 0.4s, padding-left 0.4s;
+        overflow: hidden;
+        white-space: nowrap;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        position: relative;
+      }
+      nav div.chapter-btn .chapter-icon {
+        font-size: 22px;
+        color: var(--btn-border);
+        transition: color 0.4s;
+        margin-right: 0;
+      }
+      nav div.chapter-btn .chapter-number {
+        display: flex;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #fff;
+        color: var(--btn-border);
+        font-size: 18px;
+        font-weight: bold;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        border: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 2;
+        pointer-events: none;
+        box-shadow: none;
+        transition: opacity 0.3s;
+      }
+      nav.expanded div.chapter-btn .chapter-number {
+        opacity: 0;
+        pointer-events: none;
+      }
+      nav.expanded div.chapter-btn {
+        width: 370px;
+        border-radius: 50px;
+        justify-content: flex-start;
+        padding-left: 18px;
+        font-size: 17px;
+        box-shadow: var(--btn-shadow-hover);
+      }
+      nav.expanded div.chapter-btn .chapter-label {
+        opacity: 1;
+        margin-left: 12px;
+        transition: opacity 0.4s, margin-left 0.4s;
+      }
+      div.chapter-btn .chapter-label {
+        opacity: 0;
+        margin-left: 0;
+        transition: opacity 0.4s, margin-left 0.4s;
+      }
+      nav:not(.expanded) .chapter-label {
+        display: none;
+      }
+      nav:not(.expanded) .chapter-btn {
+        flex-direction: column;
+        gap: 0;
+      }
+      nav.expanded .chapter-btn .chapter-icon {
+        display: inline;
+      }
+      nav.expanded .chapter-btn .chapter-label {
+        display: inline;
+      }
+      nav.expanded .chapter-btn .chapter-number {
+        display: flex;
+      }
+      nav:not(.expanded) .chapter-btn .chapter-icon {
+        display: none;
+      }
+      nav:hover {
+        background: var(--nav-bg);
+      }
+      @media (max-width: 600px) {
+        nav,
+        nav.expanded {
+          width: 98vw !important;
+          min-height: unset;
+          margin: 0;
+          padding: 16px 4px;
+          border-radius: 0 0 32px 32px;
+          border-right: none;
+          border-bottom: 1.5px solid var(--nav-border);
+        }
+        .switch-container {
+          right: 12px;
+          top: 12px;
+        }
+      }
+      body {
+        padding-left: 130px;
+        transition: padding-left 0.4s linear;
+      }
+      main.content-area {
+        padding: 40px 40px 40px 40px;
+        min-height: 100vh;
+        background: var(--content-bg);
+        color: var(--content-text);
+        transition: background 0.4s, color 0.4s;
+        font-family: "Segoe UI", Arial, sans-serif;
+        box-sizing: border-box;
+      }
+      @media (max-width: 600px) {
+        body {
+          padding-left: 0;
+          padding-top: 80px;
+        }
+        main.content-area {
+          margin-left: 0 !important;
+          padding: 20px 5vw;
+        }
+      }
+      .topic-section {
+        margin-bottom: 36px;
+      }
+      .topic-section h2 {
+        color: #ef4444;
+        margin-bottom: 10px;
+        font-size: 1.4em;
+      }
+      .topic-section h3 {
+        color: #2d3748;
+        margin-bottom: 8px;
+        font-size: 1.1em;
+      }
+      body.dark .topic-section h3 {
+        color: #f3f4f6;
+      }
+      .topic-section ul,
+      .topic-section ol {
+        margin-left: 24px;
+      }
+      .topic-section table {
+        border-collapse: collapse;
+        width: 100%;
+        margin: 12px 0;
+      }
+      .topic-section table,
+      .topic-section th,
+      .topic-section td {
+        border: 1px solid #ef4444;
+      }
+      .topic-section th,
+      .topic-section td {
+        padding: 8px 12px;
+        text-align: left;
+      }
+      .topic-section th {
+        background: #f3f4f6;
+      }
+      body.dark .topic-section th,
+      body.dark .topic-section code {
+        background: #1e293b;
+        color: #ef4444;
+      }
+      .topic-section code {
+        background: #f3f4f6;
+        color: #ef4444;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 1em;
+      }
+      .syllabus-table {
+        border-collapse: collapse;
+        width: 100%;
+        margin: 24px 0;
+        background: var(--content-bg);
+        color: var(--content-text);
+      }
+      .syllabus-table th,
+      .syllabus-table td {
+        border: 1px solid #ef4444;
+        padding: 8px 12px;
+        text-align: left;
+      }
+      .syllabus-table th {
+        background: #f3f4f6;
+        font-weight: bold;
+      }
+      body.dark .syllabus-table th,
+      body.dark .syllabus-table td {
+        background: #1e293b;
+        color: #ef4444;
+      }
+    </style>
+  </head>
+  <body>
+    <nav id="navbar">
+      <div class="nav-header">
+        <p id="title">
+          <button class="home-btn" id="homeBtn" title="Home">
+            <span class="home-icon">&#8962;</span>
+            <span id="menu-text">Home</span>
+          </button>
+        </p>
+        <div class="switch-container">
+          <span class="switch-label">🌞/🌙</span>
+          <label class="switch">
+            <input type="checkbox" id="modeSwitch" />
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+      <div id="chap1" class="chapter-btn">
+        <span class="chapter-number">1</span>
+        <span class="chapter-icon">🗄️</span>
+        <span class="chapter-label">1. Database Management System</span>
+      </div>
+      <div id="chap2" class="chapter-btn">
+        <span class="chapter-number">2</span>
+        <span class="chapter-icon">🔢</span>
+        <span class="chapter-label">2. Boolean Algebra</span>
+      </div>
+      <div id="chap3" class="chapter-btn">
+        <span class="chapter-number">3</span>
+        <span class="chapter-icon">🌐</span>
+        <span class="chapter-label">3. Networking and Internet</span>
+      </div>
+      <div id="chap4" class="chapter-btn">
+        <span class="chapter-number">4</span>
+        <span class="chapter-icon">💻</span>
+        <span class="chapter-label">4. Web Development</span>
+      </div>
+      <div id="chap5" class="chapter-btn">
+        <span class="chapter-number">5</span>
+        <span class="chapter-icon">🐍</span>
+        <span class="chapter-label">5. Programming in Python</span>
+      </div>
+      <div id="chap6" class="chapter-btn">
+        <span class="chapter-number">6</span>
+        <span class="chapter-icon">🗂️</span>
+        <span class="chapter-label">6. Data Structures</span>
+      </div>
+      <div id="chap7" class="chapter-btn">
+        <span class="chapter-number">7</span>
+        <span class="chapter-icon">📁</span>
+        <span class="chapter-label">7. Project Work</span>
+      </div>
+    </nav>
+    <main class="content-area" id="main-content">
+      <div id="home-content">
+        <h1>Grade 12 Computer Science</h1>
+        <p>
+          Welcome to the Grade 12 Computer Science portal! Here you will find
+          resources, notes, and practicals for all chapters of your curriculum.
+          Use the navigation menu to explore each topic in detail.
+        </p>
+        <h2>Syllabus</h2>
+        <table class="syllabus-table">
+          <tr>
+            <th>S.N.</th>
+            <th>Topic</th>
+            <th>Content wise marks</th>
+            <th>Working hours</th>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>Database management system</td>
+            <td>8</td>
+            <td>12</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Data communication and networking</td>
+            <td>9</td>
+            <td>15</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Web Tech – II</td>
+            <td>8</td>
+            <td>12</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>C Programming II</td>
+            <td>8</td>
+            <td>12</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>Object oriented programming</td>
+            <td>6</td>
+            <td>10</td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td>Software development life cycle</td>
+            <td>6</td>
+            <td>10</td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td>Recent Trends in technology</td>
+            <td>5</td>
+            <td>9</td>
+          </tr>
+          <tr>
+            <th colspan="2">Total</th>
+            <th>50</th>
+            <th>80</th>
+          </tr>
+        </table>
+      </div>
+    </main>
+    <script>
+      const nav = document.getElementById("navbar")
+      const navtitle = document.getElementById("title")
+      const switchContainer = document.querySelector(".switch-container")
+      const mainContent = document.getElementById("main-content")
+      const homeBtn = document.getElementById("homeBtn")
+      const homeContent = document.getElementById("home-content")
+
+      // Hide chapter labels and darkmode switch by default
+      document.querySelectorAll(".chapter-label").forEach((label) => {
+        label.style.opacity = "0"
+        label.style.marginLeft = "0"
+      })
+      switchContainer.style.opacity = "0"
+      switchContainer.style.pointerEvents = "none"
+
+      nav.addEventListener("mouseenter", () => {
+        nav.classList.add("expanded")
+        // Show Home button as active
+        navtitle.innerHTML = `<button class="home-btn" id="homeBtn" title="Home"><span class="home-icon">&#8962;</span><span id="menu-text">Home</span></button>`
+        document.querySelectorAll(".chapter-label").forEach((label) => {
+          label.style.opacity = "1"
+          label.style.marginLeft = "12px"
+        })
+        // Hide numbers in circles
+        document.querySelectorAll(".chapter-number").forEach((num) => {
+          num.style.opacity = "0"
+        })
+        switchContainer.style.opacity = "1"
+        switchContainer.style.pointerEvents = "auto"
+        // Re-attach home button event
+        document.getElementById("homeBtn").onclick = showHome
+      })
+
+      nav.addEventListener("mouseleave", () => {
+        nav.classList.remove("expanded")
+        navtitle.innerHTML = `<button class="home-btn" id="homeBtn" title="Home"><span class="home-icon">&#8962;</span><span id="menu-text">Home</span></button>`
+        document.querySelectorAll(".chapter-label").forEach((label) => {
+          label.style.opacity = "0"
+          label.style.marginLeft = "0"
+        })
+        // Show numbers in circles
+        document.querySelectorAll(".chapter-number").forEach((num) => {
+          num.style.opacity = "1"
+        })
+        switchContainer.style.opacity = "0"
+        switchContainer.style.pointerEvents = "none"
+        // Re-attach home button event
+        document.getElementById("homeBtn").onclick = showHome
+      })
+
+      // Light/Dark mode switch
+      const modeSwitch = document.getElementById("modeSwitch")
+      modeSwitch.addEventListener("change", function () {
+        document.body.classList.toggle("dark", this.checked)
+      })
+
+      // Home button click handler
+      function showHome() {
+        mainContent.innerHTML = homeContent.outerHTML
+      }
+      document.getElementById("homeBtn").onclick = showHome
+
+      // Chapter 1 content
+      const chapter1Content = `
+        <div class="topic-section">
+            <h2>Data</h2>
+            <p>Data refers to raw, unorganized facts and figures that have little meaning on their own. Examples include numbers, words, measurements, observations, or even just descriptions of things.</p>
+        </div>
+        <div class="topic-section">
+            <h2>Information</h2>
+            <p>Information is processed, organized, or structured data that is meaningful and useful for decision-making. Information provides context for data.</p>
+        </div>
+        <div class="topic-section">
+            <h2>Features of Information</h2>
+            <ul>
+                <li><strong>Accuracy:</strong> Correct and reliable.</li>
+                <li><strong>Timeliness:</strong> Available when needed.</li>
+                <li><strong>Completeness:</strong> Contains all necessary details.</li>
+                <li><strong>Relevance:</strong> Applicable to the situation.</li>
+                <li><strong>Conciseness:</strong> Brief and to the point.</li>
+                <li><strong>Clarity:</strong> Easily understood.</li>
+            </ul>
+        </div>
+        <div class="topic-section">
+            <h2>Database and its Purpose</h2>
+            <p>A <strong>database</strong> is an organized collection of data, generally stored and accessed electronically from a computer system. Its purpose is to store, manage, and retrieve data efficiently and securely.</p>
+        </div>
+        <div class="topic-section">
+            <h2>Terminologies in Database</h2>
+            <ul>
+                <li><strong>Table:</strong> Collection of related data in rows and columns.</li>
+                <li><strong>Field:</strong> A single piece of data; a column in a table.</li>
+                <li><strong>Record:</strong> A complete set of fields; a row in a table.</li>
+                <li><strong>Tuple:</strong> Another term for a record (row).</li>
+                <li><strong>Object:</strong> An entity with data and behavior (in object-oriented databases).</li>
+                <li><strong>Keys:</strong> Attributes used to identify records uniquely.</li>
+            </ul>
+        </div>
+        <div class="topic-section">
+            <h2>Data Dictionary</h2>
+            <p>A <strong>data dictionary</strong> is a centralized repository of information about data such as meaning, relationships to other data, origin, usage, and format.</p>
+        </div>
+        <div class="topic-section">
+            <h2>Database Management System (DBMS)</h2>
+            <h3>Introduction</h3>
+            <p>A <strong>DBMS</strong> is software that interacts with users, applications, and the database itself to capture and analyze data.</p>
+            <h3>Objectives</h3>
+            <ul>
+                <li>Efficient data management</li>
+                <li>Data integrity and security</li>
+                <li>Concurrent access</li>
+                <li>Data independence</li>
+            </ul>
+            <h3>Advantages</h3>
+            <ul>
+                <li>Reduces data redundancy</li>
+                <li>Improves data sharing</li>
+                <li>Enhances data security</li>
+                <li>Ensures data consistency</li>
+            </ul>
+            <h3>Disadvantages</h3>
+            <ul>
+                <li>Complexity</li>
+                <li>Cost of hardware/software</li>
+                <li>Need for backup and recovery</li>
+            </ul>
+        </div>
+        <div class="topic-section">
+            <h2>Types of Database Model</h2>
+            <ul>
+                <li><strong>Hierarchical:</strong> Data is organized in a tree-like structure.</li>
+                <li><strong>Network:</strong> Data is organized in a graph, allowing many-to-many relationships.</li>
+                <li><strong>Relational:</strong> Data is organized in tables (relations).</li>
+                <li><strong>Entity-Relational:</strong> Uses entities and relationships (ER diagrams).</li>
+            </ul>
+        </div>
+        <div class="topic-section">
+            <h2>Integrity Constraints and Types</h2>
+            <ul>
+                <li><strong>Domain Constraint:</strong> Restricts the type of data for a field.</li>
+                <li><strong>Entity Constraint:</strong> Ensures each row is unique (primary key).</li>
+                <li><strong>Referential Constraint:</strong> Ensures foreign keys match primary keys in related tables.</li>
+                <li><strong>Keys:</strong> Unique identifiers for records (Primary, Foreign, Candidate, etc.).</li>
+            </ul>
+        </div>
+        <div class="topic-section">
+            <h2>Normalization</h2>
+            <h3>Introduction</h3>
+            <p>Normalization is the process of organizing data to minimize redundancy and improve data integrity.</p>
+            <h3>Normal Forms</h3>
+            <ul>
+                <li><strong>1NF:</strong> Eliminate repeating groups; each field contains atomic values.</li>
+                <li><strong>2NF:</strong> Remove partial dependencies; every non-key attribute is fully functionally dependent on the primary key.</li>
+                <li><strong>3NF:</strong> Remove transitive dependencies; non-key attributes depend only on the primary key.</li>
+            </ul>
+            <h3>Advantages</h3>
+            <ul>
+                <li>Reduces data redundancy</li>
+                <li>Improves data integrity</li>
+            </ul>
+            <h3>Disadvantages</h3>
+            <ul>
+                <li>Can make queries more complex</li>
+                <li>May require more joins</li>
+            </ul>
+        </div>
+        <div class="topic-section">
+            <h2>Centralized and Distributed Database</h2>
+            <h3>Introduction</h3>
+            <p>
+                <strong>Centralized Database:</strong> All data is stored at a single location.<br>
+                <strong>Distributed Database:</strong> Data is stored across multiple locations.
+            </p>
+            <h3>Advantages</h3>
+            <ul>
+                <li><strong>Centralized:</strong> Easy to manage, consistent data.</li>
+                <li><strong>Distributed:</strong> Improved reliability, faster access for remote users.</li>
+            </ul>
+            <h3>Disadvantages</h3>
+            <ul>
+                <li><strong>Centralized:</strong> Single point of failure, slower for remote users.</li>
+                <li><strong>Distributed:</strong> Complex management, data consistency issues.</li>
+            </ul>
+            <h3>Comparison</h3>
+            <table>
+                <tr><th>Aspect</th><th>Centralized</th><th>Distributed</th></tr>
+                <tr><td>Location</td><td>Single</td><td>Multiple</td></tr>
+                <tr><td>Reliability</td><td>Lower</td><td>Higher</td></tr>
+                <tr><td>Management</td><td>Simpler</td><td>Complex</td></tr>
+            </table>
+        </div>
+        <div class="topic-section">
+            <h2>Database Security</h2>
+            <h3>Introduction</h3>
+            <p>Database security refers to the protection of the database against unauthorized access, misuse, or threats.</p>
+            <h3>Challenges</h3>
+            <ul>
+                <li>Unauthorized access</li>
+                <li>Data leakage</li>
+                <li>Malware and cyber attacks</li>
+            </ul>
+            <h3>Security Measures</h3>
+            <ul>
+                <li>User authentication and authorization</li>
+                <li>Encryption</li>
+                <li>Regular backups</li>
+                <li>Audit trails</li>
+            </ul>
+            <h3>Roles of DBA</h3>
+            <ul>
+                <li>Database design and implementation</li>
+                <li>Security management</li>
+                <li>Backup and recovery</li>
+                <li>Performance tuning</li>
+            </ul>
+        </div>
+        <div class="topic-section">
+            <h2>Practical Topics: DDL and DML Languages</h2>
+            <ul>
+                <li><strong>DDL (Data Definition Language):</strong> Used to define and modify database structure. Examples: <code>CREATE</code>, <code>ALTER</code>, <code>DROP</code>.</li>
+                <li><strong>DML (Data Manipulation Language):</strong> Used to manipulate data. Examples: <code>SELECT</code>, <code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code>.</li>
+            </ul>
+        </div>
+        <div class="topic-section">
+            <h2>SQL Data Types</h2>
+            <ul>
+                <li><code>CHAR</code>: Fixed-length character string.</li>
+                <li><code>VARCHAR</code>: Variable-length character string.</li>
+                <li><code>BINARY</code>: Fixed-length binary data.</li>
+                <li><code>VARBINARY</code>: Variable-length binary data.</li>
+                <li><code>TINYBLOB</code>: Very small binary large object.</li>
+                <li><code>TINYTEXT</code>: Very small text string.</li>
+                <li><code>TEXT</code>: Large text string.</li>
+                <li><code>LONGTEXT</code>: Very large text string.</li>
+                <li><code>ENUM</code>: Enumeration, a string object with a value chosen from a list.</li>
+                <li><code>BIT</code>: Bit-field type.</li>
+                <li><code>TINYINT</code>: Very small integer.</li>
+                <li><code>BOOLEAN</code>: Boolean value (true/false).</li>
+                <li><code>INTEGER</code>: Standard integer.</li>
+                <li><code>FLOAT</code>: Floating-point number.</li>
+                <li><code>DOUBLE</code>: Double-precision floating-point number.</li>
+                <li><code>DECIMAL</code>: Fixed-point number.</li>
+                <li><code>DATE</code>: Date value (YYYY-MM-DD).</li>
+                <li><code>DATETIME</code>: Date and time value (YYYY-MM-DD HH:MM:SS).</li>
+            </ul>
+        </div>
+      `
+
+      // Add click event for Chapter 1
+      document.getElementById("chap1").addEventListener("click", function () {
+        mainContent.innerHTML = chapter1Content
+      })
+
+      // Home button click handler (also re-attach after nav hover)
+      function showHome() {
+        mainContent.innerHTML =
+          document.getElementById("home-content").outerHTML
+      }
+      document.getElementById("homeBtn").onclick = showHome
+    </script>
+  </body>
+</html>
