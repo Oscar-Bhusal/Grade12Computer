@@ -756,12 +756,337 @@
                 <li><code>DATETIME</code>: Date and time value (YYYY-MM-DD HH:MM:SS).</li>
             </ul>
         </div>
-      `
+        <div class="topic-section">
+    <h2>Questions</h2>
+    <ol style="line-height:2.2;">
+      <li style="margin-bottom:24px;">
+        <strong>What is a Database and DBMS? List out the advantages and disadvantages of DBMS.</strong>
+        <ul style="margin-top:10px; margin-bottom:10px;">
+          <li>
+            <span>🔹 <b>Database:</b> An organized collection of related data that can be accessed, managed, and updated easily.</span>
+          </li>
+          <li>
+            <span>🔹 <b>DBMS:</b> Software that allows users to define, manipulate, retrieve, and manage data in a database efficiently.</span>
+          </li>
+        </ul>
+        <b>✅ Advantages of DBMS:</b>
+        <ul style="margin-top:10px; margin-bottom:10px;">
+          <li>Reduces data redundancy</li>
+          <li>Ensures data integrity</li>
+          <li>Provides data security</li>
+          <li>Allows concurrent access</li>
+          <li>Facilitates data sharing</li>
+        </ul>
+        <b>❌ Disadvantages of DBMS:</b>
+        <ul style="margin-top:10px; margin-bottom:10px;">
+          <li>Complex to implement</li>
+          <li>Expensive hardware/software</li>
+          <li>Requires skilled personnel</li>
+          <li>Potential system failure affects all users</li>
+        </ul>
+      </li>
+      <li style="margin-bottom:24px;">
+        <strong>Differentiate between File Processing System and DBMS (Any 4 points):</strong>
+        <table style="margin-top:12px; margin-bottom:12px;">
+          <tr><th>S.N.</th><th>File Processing System</th><th>DBMS</th></tr>
+          <tr><td>1</td><td>Data is stored in separate files.</td><td>Data is stored in a centralized database.</td></tr>
+          <tr><td>2</td><td>High data redundancy.</td><td>Reduces redundancy.</td></tr>
+          <tr><td>3</td><td>No data security.</td><td>Provides strong data security.</td></tr>
+          <tr><td>4</td><td>Difficult to access and manage data.</td><td>Easy to access and manage using queries.</td></tr>
+        </table>
+      </li>
+      <li style="margin-bottom:24px;">
+        <strong>Explain the Different Models of DBMS with Advantages and Disadvantages.</strong>
+        <ul style="margin-top:10px; margin-bottom:10px;">
+          <li>
+            <b>a. Hierarchical Model:</b> Organizes data in a tree-like structure with parent-child relationships.
+            <ul style="margin-top:6px;">
+              <li>✅ <b>Advantages:</b> Simple to design, Fast for hierarchical data</li>
+              <li>❌ <b>Disadvantages:</b> Complex to modify, Rigid structure</li>
+            </ul>
+          </li>
+          <li style="margin-top:10px;">
+            <b>b. Network Model:</b> Allows many-to-many relationships using graph structures.
+            <ul style="margin-top:6px;">
+              <li>✅ <b>Advantages:</b> More flexible than hierarchical, Efficient for complex relationships</li>
+              <li>❌ <b>Disadvantages:</b> Complicated to design, Difficult to maintain</li>
+            </ul>
+          </li>
+          <li style="margin-top:10px;">
+            <b>c. Relational Model:</b> Organizes data into tables (relations) of rows and columns.
+            <ul style="margin-top:6px;">
+              <li>✅ <b>Advantages:</b> Easy to understand and use, High flexibility</li>
+              <li>❌ <b>Disadvantages:</b> Slower for complex relationships, Requires high processing power</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li style="margin-bottom:24px;">
+        <strong>What is a Relational Database? How is it Different from Other Models?</strong>
+        <ul style="margin-top:10px; margin-bottom:10px;">
+          <li>🔹 A relational database organizes data into tables (relations) with rows (records) and columns (fields).</li>
+          <li>🔹 It uses SQL for data operations.</li>
+        </ul>
+        <b>Difference:</b>
+        <ul style="margin-top:10px; margin-bottom:10px;">
+          <li>Unlike hierarchical and network models, relational databases allow dynamic querying, data independence, and easy modification without restructuring the whole database.</li>
+        </ul>
+      </li>
+      <li style="margin-bottom:24px;">
+        <strong>What is Data Redundancy? How Does DBMS Help in Reducing It?</strong>
+        <ul style="margin-top:10px; margin-bottom:10px;">
+          <li>🔹 Data redundancy means unnecessary duplication of data in multiple files.</li>
+          <li>🔹 DBMS reduces redundancy by centralizing data storage and enabling data normalization.</li>
+        </ul>
+      </li>
+      <li style="margin-bottom:24px;">
+        <strong>Differentiate Between Centralized and Distributed Database Systems:</strong>
+        <table style="margin-top:12px; margin-bottom:12px;">
+          <tr><th>S.N.</th><th>Centralized DB</th><th>Distributed DB</th></tr>
+          <tr><td>1</td><td>All data is stored at one location.</td><td>Data is stored at multiple locations.</td></tr>
+          <tr><td>2</td><td>Easier to manage.</td><td>More complex to manage.</td></tr>
+          <tr><td>3</td><td>Single point of failure.</td><td>More fault-tolerant.</td></tr>
+          <tr><td>4</td><td>Lower maintenance cost.</td><td>Higher maintenance cost.</td></tr>
+        </table>
+      </li>
+      <li style="margin-bottom:24px;">
+        <strong>Who is a Database Administrator (DBA)? What are Their Major Responsibilities?</strong>
+        <ul style="margin-top:10px; margin-bottom:10px;">
+          <li>🔹 A Database Administrator (DBA) is a person responsible for managing and maintaining the database system.</li>
+        </ul>
+        <b>Responsibilities:</b>
+        <ul style="margin-top:10px; margin-bottom:10px;">
+          <li>Designing and implementing databases</li>
+          <li>Ensuring data security and backup</li>
+          <li>Optimizing performance</li>
+          <li>Managing user access</li>
+          <li>Monitoring and tuning databases</li>
+        </ul>
+      </li>
+      <li style="margin-bottom:24px;">
+        <strong>Define Normalization. Explain 1NF, 2NF, and 3NF with Examples.</strong>
+        <ul style="margin-top:10px; margin-bottom:10px;">
+          <li>🔹 Normalization is the process of organizing data in a database to eliminate redundancy and improve integrity.</li>
+        </ul>
+        <b>a. 1NF (First Normal Form):</b> Atomic values, no repeating groups.<br>
+        <b>Example:</b>
+        <table style="margin-top:12px; margin-bottom:12px;">
+          <tr><th>ID</th><th>Name</th><th>Subjects</th></tr>
+          <tr><td>1</td><td>Ram</td><td>Math, Science</td></tr>
+        </table>
+        <span>→ 1NF:</span>
+        <table style="margin-top:12px; margin-bottom:12px;">
+          <tr><th>ID</th><th>Name</th><th>Subject</th></tr>
+          <tr><td>1</td><td>Ram</td><td>Math</td></tr>
+          <tr><td>1</td><td>Ram</td><td>Science</td></tr>
+        </table>
+        <b>b. 2NF (Second Normal Form):</b> In 1NF + No partial dependency.<br>
+        <b>Example:</b>
+        <table style="margin-top:12px; margin-bottom:12px;">
+          <tr><th>Roll</th><th>Subject</th><th>Teacher</th></tr>
+        </table>
+        <span>→ If 'Teacher' depends only on 'Subject', it should be in a separate table.</span>
+        <b>c. 3NF (Third Normal Form):</b> In 2NF + No transitive dependency.<br>
+        <b>Example:</b>
+        <table style="margin-top:12px; margin-bottom:12px;">
+          <tr><th>ID</th><th>Name</th><th>Dept_ID</th><th>Dept_Name</th></tr>
+        </table>
+        <span>→ Move Dept_Name to a separate department table.</span>
+      </li>
+      <li style="margin-bottom:24px;">
+        <strong>Explain Primary Key, Foreign Key, and Candidate Key with Examples.</strong>
+        <ul style="margin-top:10px; margin-bottom:10px;">
+          <li>🔹 <b>Primary Key:</b> A unique identifier for records in a table.<br>Example: Student_ID in the Students table.</li>
+          <li>🔹 <b>Foreign Key:</b> A key that refers to the primary key of another table.<br>Example: Dept_ID in Student refers to Dept_ID in Department.</li>
+          <li>🔹 <b>Candidate Key:</b> All possible attributes that can serve as a primary key.<br>Example: In a table with Roll_No, Email – both can be candidate keys.</li>
+        </ul>
+      </li>
+      <li style="margin-bottom:24px;">
+        <strong>What is SQL? Explain Its Components and Common Functions.</strong>
+        <ul style="margin-top:10px; margin-bottom:10px;">
+          <li>🔹 SQL (Structured Query Language) is a standard language for accessing and manipulating databases.</li>
+        </ul>
+        <b>Main Components:</b>
+        <ul style="margin-top:10px; margin-bottom:10px;">
+          <li>DDL (Data Definition Language): CREATE, ALTER, DROP</li>
+          <li>DML (Data Manipulation Language): SELECT, INSERT, UPDATE, DELETE</li>
+          <li>DCL (Data Control Language): GRANT, REVOKE</li>
+          <li>TCL (Transaction Control Language): COMMIT, ROLLBACK</li>
+        </ul>
+      </li>
+      <li style="margin-bottom:24px;">
+        <strong>SQL Commands:</strong>
+        <ul style="margin-top:10px; margin-bottom:10px;">
+          <li>
+            <b>a. Create a table:</b>
+            <pre style="margin-top:8px; margin-bottom:8px;"><code>CREATE TABLE Students (
+  Id INT,
+  Name VARCHAR(50),
+  Class VARCHAR(10),
+  Marks INT
+);</code></pre>
+            <img src="1.png" alt="SQL Output 1" style="max-width:100%;margin:12px 0;">
+          </li>
+          <li>
+            <b>b. Insert records:</b>
+            <pre style="margin-top:8px; margin-bottom:8px;"><code>INSERT INTO Students VALUES (1, 'Logitech', '12A', 80);
+INSERT INTO Students VALUES (2, 'Anita', '12B', 78);
+INSERT INTO Students VALUES (3, 'Daniel', '12A', 65);
+INSERT INTO Students VALUES (4, 'Duke', '12C', 25);</code></pre>
+            <img src="2.png" alt="SQL Output 2" style="max-width:100%;margin:12px 0;">
+          </li>
+          <li>
+            <b>c. Display all records:</b>
+            <pre style="margin-top:8px; margin-bottom:8px;"><code>SELECT * FROM Students;</code></pre>
+            <img src="3.png" alt="SQL Output 3" style="max-width:100%;margin:12px 0;">
+          </li>
+          <li>
+            <b>d. Update marks:</b>
+            <pre style="margin-top:8px; margin-bottom:8px;"><code>UPDATE Students SET Marks = 85 WHERE Name = 'Anita';</code></pre>
+            <img src="4.png" alt="SQL Output 4" style="max-width:100%;margin:12px 0;">
+          </li>
+          <li>
+            <b>e. Delete record:</b>
+            <pre style="margin-top:8px; margin-bottom:8px;"><code>DELETE FROM Students WHERE Id = 3;</code></pre>
+            <img src="5.png" alt="SQL Output 5" style="max-width:100%;margin:12px 0;">
+          </li>
+        </ul>
+      </li>
+      <li style="margin-bottom:24px;">
+        <strong>Define the Following Terms:</strong>
+        <ul style="margin-top:10px; margin-bottom:10px;">
+          <li><b>a. Data Dictionary:</b> A centralized repository containing definitions and structures of data items in a database.</li>
+          <li><b>b. Primary Key:</b> A unique, non-null identifier of each record in a table.</li>
+          <li><b>c. Relationship:</b> A logical connection between two or more tables in a database.</li>
+          <li><b>d. Data Manipulation Language (DML):</b> Subset of SQL used to modify data. (e.g., INSERT, UPDATE, DELETE)</li>
+          <li><b>e. Structured Query Language (SQL):</b> A standard programming language for managing relational databases.</li>
+          <li><b>f. Data Integrity:</b> Ensures accuracy, consistency, and reliability of data.</li>
+          <li><b>g. Data Definition Language (DDL):</b> Commands that define database schema (e.g., CREATE, DROP).</li>
+          <li><b>h. Data Security:</b> Protection of data from unauthorized access or corruption.</li>
+          <li><b>i. Database System:</b> A combination of database, DBMS software, hardware, and users interacting with the system.</li>
+        </ul>
+      </li>
+    </ol>
+  </div>`
 
-      // Add click event for Chapter 1
-      document.getElementById("chap1").addEventListener("click", function () {
+      // Example: Add content for other chapters as needed
+      const chapter2Content = `<div class="topic-section"><h2>Data communication and networking</h2><p>Content coming soon...</p></div>`
+      const chapter3Content = `<div class="topic-section"><h2>Web Tech – II</h2><p>Content coming soon...</p></div>`
+      const chapter4Content = `
+  <div class="topic-section">
+    <h2>C Programming II</h2>
+    <h3>Unit 2 – C programming</h3>
+    <ol style="line-height:2;">
+      <li>
+        <b>Working with a function</b>
+        <ul style="margin-top:8px;">
+          <li><b>Define function:</b> A function is a block of code that performs a specific task. It helps break a program into smaller, manageable pieces and allows code reuse.</li>
+          <li><b>Syntax of functions:</b>
+            <pre style="margin-top:8px;"><code>return_type function_name(parameters) {
+    // body of function
+}</code></pre>
+          </li>
+          <li><b>Types of functions:</b>
+            <ul>
+              <li><b>Library functions:</b> Predefined functions provided by C, e.g., <code>printf()</code>, <code>scanf()</code>.</li>
+              <li><b>User defined functions:</b> Functions created by the programmer for specific tasks.</li>
+            </ul>
+          </li>
+          <li><b>Components of function:</b>
+            <ul>
+              <li><b>Function prototype:</b> Declaration before use, e.g., <code>int add(int, int);</code></li>
+              <li><b>Function call:</b> Invoking the function, e.g., <code>add(5, 3);</code></li>
+              <li><b>Function definition:</b> Actual implementation, e.g., <code>int add(int a, int b) { return a + b; }</code></li>
+              <li><b>Return type:</b> Specifies the type of value returned, e.g., <code>int</code>, <code>void</code>.</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li style="margin-top:16px;">
+        <b>Categories of function with example</b>
+        <ul>
+          <li><b>Function with return type but no arguments:</b>
+            <pre style="margin-top:8px;"><code>int getNumber() {
+    return 10;
+}</code></pre>
+          </li>
+          <li><b>Function with return type with arguments:</b>
+            <pre style="margin-top:8px;"><code>int sum(int a, int b) {
+    return a + b;
+}</code></pre>
+          </li>
+          <li><b>Function with no return type with no arguments:</b>
+            <pre style="margin-top:8px;"><code>void greet() {
+    printf("Hello!");
+}</code></pre>
+          </li>
+          <li><b>Function with no return type with arguments:</b>
+            <pre style="margin-top:8px;"><code>void display(int n) {
+    printf("%d", n);
+}</code></pre>
+          </li>
+        </ul>
+      </li>
+      <li style="margin-top:16px;">
+        <b>Storage classes</b>
+        <ul>
+          <li><b>Automatic:</b> Default for local variables, created and destroyed within function scope. <code>auto int x;</code></li>
+          <li><b>External:</b> Declared with <code>extern</code>, used for global variables accessible across files.</li>
+          <li><b>Register:</b> Declared with <code>register</code>, stored in CPU register for fast access.</li>
+          <li><b>Static:</b> Declared with <code>static</code>, retains value between function calls.</li>
+        </ul>
+      </li>
+      <li style="margin-top:16px;">
+        <b>Recursive function with syntax and examples</b>
+        <p>A recursive function is a function that calls itself to solve a problem.</p>
+        <pre style="margin-top:8px;"><code>int factorial(int n) {
+    if(n == 0) return 1;
+    else return n * factorial(n - 1);
+}</code></pre>
+      </li>
+      <li style="margin-top:16px;">
+        <b>Demonstration of passing array to a function (code examples)</b>
+        <pre style="margin-top:8px;"><code>void printArray(int arr[], int size) {
+    for(int i = 0; i < size; i++) {
+        printf("%d ", arr[i]);
+    }
+}
+
+int main() {
+    int numbers[5] = {1, 2, 3, 4, 5};
+    printArray(numbers, 5);
+    return 0;
+}</code></pre>
+      </li>
+    </ol>
+  </div>
+`
+      const chapter5Content = `<div class="topic-section"><h2>Object oriented programming</h2><p>Content coming soon...</p></div>`
+      const chapter6Content = `<div class="topic-section"><h2>Software development life cycle</h2><p>Content coming soon...</p></div>`
+      const chapter7Content = `<div class="topic-section"><h2>Recent Trends in technology</h2><p>Content coming soon...</p></div>`
+
+      // Add event listeners for chapter buttons
+      document.getElementById("chap1").onclick = function () {
         mainContent.innerHTML = chapter1Content
-      })
+      }
+      document.getElementById("chap2").onclick = function () {
+        mainContent.innerHTML = chapter2Content
+      }
+      document.getElementById("chap3").onclick = function () {
+        mainContent.innerHTML = chapter3Content
+      }
+      document.getElementById("chap4").onclick = function () {
+        mainContent.innerHTML = chapter4Content
+      }
+      document.getElementById("chap5").onclick = function () {
+        mainContent.innerHTML = chapter5Content
+      }
+      document.getElementById("chap6").onclick = function () {
+        mainContent.innerHTML = chapter6Content
+      }
+      document.getElementById("chap7").onclick = function () {
+        mainContent.innerHTML = chapter7Content
+      }
     </script>
   </body>
 </html>
